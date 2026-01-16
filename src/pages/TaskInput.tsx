@@ -4,16 +4,12 @@ import {
   Flex, 
   Heading, 
   Text, 
-  VStack, 
-  HStack, 
   Button,
   Input
 } from '@chakra-ui/react';
 import { useColorModeValue } from '../components/ui/color-mode';
-import { Tag } from '../components/ui/tag';
 import { InputGroup } from '../components/ui/input-group';
 import Sidebar from '../components/Sidebar';
-import TaskItem from './TaskItem';
 import Inbox from './Inbox';
 import Today from './Today';
 import Upcoming from './Upcoming';
@@ -142,9 +138,7 @@ const Dashboard: React.FC = () => {
         zIndex={10} 
         p={{ base: '4', sm: '6', lg: '10' }} 
         display="flex" 
-        flexDirection="column" 
-        alignItems="center"
-      >
+        flexDirection="column" alignItems="center">
         <Flex w="full" display={{ base: 'flex', md: 'none' }} justify="space-between" align="center" mb="6">
           <Heading size="md" fontWeight="bold" color={useColorModeValue('gray.900', 'white')}>
             TaskMaster

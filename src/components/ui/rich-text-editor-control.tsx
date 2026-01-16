@@ -13,7 +13,6 @@ import {
   VStack,
   createListCollection,
 } from "@chakra-ui/react"
-import { Editor } from "@tiptap/react"
 import { useRichTextEditorContext } from "./rich-text-editor-context"
 import { Tooltip } from "./tooltip"
 import * as React from "react"
@@ -48,8 +47,8 @@ import {
 export interface BaseControlConfig {
   label: string
   icon?: React.ElementType
-  isDisabled?: (editor: Editor) => boolean
-  getProps?: (editor: Editor) => Record<string, any>
+  isDisabled?: (editor: any) => boolean
+  getProps?: (editor: any) => Record<string, any>
 }
 
 export interface ButtonControlProps
@@ -76,8 +75,8 @@ export const ButtonControl = React.forwardRef<
 
 export interface BooleanControlConfig extends BaseControlConfig {
   icon: React.ElementType
-  command: (editor: Editor) => void
-  getVariant?: (editor: Editor) => IconButtonProps["variant"]
+  command: (editor: any) => void
+  getVariant?: (editor: any) => IconButtonProps["variant"]
 }
 
 export function createBooleanControl(config: BooleanControlConfig) {
@@ -128,8 +127,8 @@ export interface SelectOption {
 export interface SelectControlConfig extends BaseControlConfig {
   options: SelectOption[]
   width?: Select.RootProps["width"]
-  getValue: (editor: Editor) => string
-  command: (editor: Editor, value: string) => void
+  getValue: (editor: any) => string
+  command: (editor: any, value: string) => void
   placeholder?: string
   renderValue?: (value: string, option?: SelectOption) => React.ReactNode
 }
@@ -225,10 +224,10 @@ export interface SwatchOption {
 }
 export interface SwatchControlConfig extends BaseControlConfig {
   swatches: SwatchOption[]
-  getValue: (editor: Editor) => string
-  command: (editor: Editor, value: string) => void
+  getValue: (editor: any) => string
+  command: (editor: any, value: string) => void
   showRemove?: boolean
-  onRemove?: (editor: Editor) => void
+  onRemove?: (editor: any) => void
 }
 
 export function createSwatchControl(config: SwatchControlConfig) {
