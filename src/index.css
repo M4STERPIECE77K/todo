@@ -1,0 +1,13 @@
+/* Chakra UI handles base styles */
+
+/* We'll keep the tailwind directives for now to transition, but we'll remove them eventually */
+/* For now, just keeping the custom styles that Chakra doesn't handle natively as easily in globals */
+
+.task-checkbox:checked + div {
+  background-color: #3e818e;
+  border-color: #3e818e;
+}
+
+.task-checkbox:checked + div span {
+  opacity: 1;
+}
