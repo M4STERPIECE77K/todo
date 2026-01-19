@@ -2,8 +2,13 @@ import React from 'react';
 import { Box, VStack, Text, HStack } from '@chakra-ui/react';
 import { Tag } from '../components/ui/tag';
 import TaskItem from './TaskItem';
+import type { Task } from '../types/task';
 
-const Inbox: React.FC = () => {
+interface InboxProps {
+  tasks: Task[];
+}
+
+const Inbox: React.FC<InboxProps> = ({ tasks }) => {
   const sectionTitleColor = 'gray.400';
 
   return (
@@ -18,10 +23,19 @@ const Inbox: React.FC = () => {
           </Tag>
         </HStack>
         <VStack align="stretch" gap="2">
-          <TaskItem title="Design new landing page" priority="High" />
-          <TaskItem title="Update documentation" priority="Medium" />
-          <TaskItem title="Meeting with team" priority="Low" time="11:00 AM" />
-          <TaskItem title="Review pull requests" priority="High" />
+          {tasks.length > 0 ? (
+            tasks.map(task => (
+              <TaskItem 
+                key={task.id}
+                title={task.title} 
+                priority={task.priority} 
+                category={task.category}
+                isRoutine={task.routine}
+              />
+            ))
+          ) : (
+            <Text color="gray.400" fontSize="sm">No tasks yet. Create one above!</Text>
+          )}
         </VStack>
       </Box>
     </Box>

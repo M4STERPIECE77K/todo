@@ -9,8 +9,13 @@ import {
 import { useColorModeValue } from '../components/ui/color-mode';
 import { Tag } from '../components/ui/tag';
 import TaskItem from './TaskItem';
+import type { Task } from '../types/task';
 
-const Today: React.FC = () => {
+interface TodayProps {
+  tasks: Task[];
+}
+
+const Today: React.FC<TodayProps> = ({ tasks }) => {
   const sectionTitleColor = 'gray.400';
 
   return (
@@ -21,12 +26,23 @@ const Today: React.FC = () => {
             High Priority
           </Text>
           <Tag size="sm" rounded="md" bg={{ _light: 'red.100', _dark: 'rgba(254, 178, 178, 0.1)' }} color={{ _light: 'red.600', _dark: 'red.400' }} fontSize="10px">
-            2
+            {tasks.filter(t => t.priority === 'High').length}
           </Tag>
         </HStack>
         <VStack align="stretch" gap="2">
-          <TaskItem title="Review Q3 Financial Reports" priority="High" time="2:00 PM" />
-          <TaskItem title="Finalize deck for investor meeting" priority="High"/>
+          {tasks.filter(t => t.priority === 'High').length > 0 ? (
+            tasks.filter(t => t.priority === 'High').map(task => (
+              <TaskItem 
+                key={task.id}
+                title={task.title} 
+                priority={task.priority} 
+                category={task.category}
+                isRoutine={task.routine}
+              />
+            ))
+          ) : (
+            <Text color="gray.400" fontSize="sm">No high priority tasks</Text>
+          )}
         </VStack>
       </Box>
       <Box mb="8">
@@ -34,8 +50,19 @@ const Today: React.FC = () => {
           Routine
         </Text>
         <VStack align="stretch" gap="2">
-          <TaskItem title="Email marketing team about assets" priority="Medium" isRoutine/>
-          <TaskItem title="Buy coffee beans" priority="Low" category="Personal" isRoutine />
+          {tasks.filter(t => t.routine).length > 0 ? (
+            tasks.filter(t => t.routine).map(task => (
+              <TaskItem 
+                key={task.id}
+                title={task.title} 
+                priority={task.priority} 
+                category={task.category}
+                isRoutine={task.routine}
+              />
+            ))
+          ) : (
+            <Text color="gray.400" fontSize="sm">No routine tasks</Text>
+          )}
         </VStack>
       </Box>
       <Box 

@@ -1,8 +1,13 @@
 import React from 'react';
 import { Box, VStack, Text, HStack } from '@chakra-ui/react';
 import TaskItem from './TaskItem';
+import type { Task } from '../types/task';
 
-const Upcoming: React.FC = () => {
+interface UpcomingProps {
+  tasks: Task[];
+}
+
+const Upcoming: React.FC<UpcomingProps> = ({ tasks }) => {
   const sectionTitleColor = 'gray.400';
 
   return (
@@ -14,19 +19,19 @@ const Upcoming: React.FC = () => {
           </Text>
         </HStack>
         <VStack align="stretch" gap="2">
-          <TaskItem title="Client presentation" priority="High" time="10:00 AM" />
-          <TaskItem title="Prepare weekly report" priority="Medium" />
-        </VStack>
-      </Box>
-      <Box mb="8">
-        <HStack gap="2" mb="4">
-          <Text fontSize="xs" fontWeight="bold" color={sectionTitleColor} textTransform="uppercase" letterSpacing="wider">
-            Next Week
-          </Text>
-        </HStack>
-        <VStack align="stretch" gap="2">
-          <TaskItem title="Product roadmap review" priority="High" />
-          <TaskItem title="Team building event" priority="Low" />
+          {tasks.length > 0 ? (
+            tasks.slice(0, 4).map(task => (
+              <TaskItem 
+                key={task.id}
+                title={task.title} 
+                priority={task.priority} 
+                category={task.category}
+                isRoutine={task.routine}
+              />
+            ))
+          ) : (
+            <Text color="gray.400" fontSize="sm">No upcoming tasks</Text>
+          )}
         </VStack>
       </Box>
     </Box>

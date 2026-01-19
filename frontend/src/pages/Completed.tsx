@@ -2,8 +2,13 @@ import React from 'react';
 import { Box, VStack, Text, HStack } from '@chakra-ui/react';
 import { Tag } from '../components/ui/tag';
 import TaskItem from './TaskItem';
+import type { Task } from '../types/task';
 
-const Completed: React.FC = () => {
+interface CompletedProps {
+  tasks: Task[];
+}
+
+const Completed: React.FC<CompletedProps> = ({ tasks }) => {
   const sectionTitleColor = 'gray.400';
 
   return (
@@ -18,9 +23,19 @@ const Completed: React.FC = () => {
           </Tag>
         </HStack>
         <VStack align="stretch" gap="2" opacity="0.6">
-          <TaskItem title="Send invoice to client" priority="Low" />
-          <TaskItem title="Book flight for conference" priority="Medium" />
-          <TaskItem title="Fix bug in payment gateway" priority="High" />
+          {tasks.filter(t => t.status === 'COMPLETED').length > 0 ? (
+            tasks.filter(t => t.status === 'COMPLETED').map(task => (
+              <TaskItem 
+                key={task.id}
+                title={task.title} 
+                priority={task.priority} 
+                category={task.category}
+                isRoutine={task.routine}
+              />
+            ))
+          ) : (
+            <Text color="gray.400" fontSize="sm">No completed tasks yet</Text>
+          )}
         </VStack>
       </Box>
     </Box>

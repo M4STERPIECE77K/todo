@@ -25,13 +25,16 @@ public class TaskEntity {
     @Column(name = "user_id")
     private UUID userId;
 
-    @Column(nullable = false)
+    @Column(nullable = false, columnDefinition = "TEXT")
     private String title;
 
     @Column(columnDefinition = "TEXT")
     private String description;
 
+    @Column(columnDefinition = "TEXT")
     private String priority;
+
+    @Column(columnDefinition = "TEXT")
     private String category;
 
     @Column(name = "is_routine")
@@ -40,6 +43,7 @@ public class TaskEntity {
     @Column(name = "due_date")
     private OffsetDateTime dueDate;
 
+    @Column(columnDefinition = "TEXT")
     private String status;
 
     @CreationTimestamp
