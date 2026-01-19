@@ -2,9 +2,7 @@ name: CI Develop
 
 on:
   push:
-    branches: [ develop, "feature/*", "feat/*" ]
-  pull_request:
-    branches: [ develop, "feature/*", "feat/*" ]
+    branches: [ develop, "feature/*", "feat/*", "hotfix/*", "release/*" ]
 
 jobs:
   frontend-ci:
