@@ -1,9 +1,10 @@
 "use client"
 
+import type { Editor } from "@tiptap/react"
 import * as React from "react"
 
 export interface RichTextEditorContextValue {
-  editor: any
+  editor: Editor | null
 }
 
 export const RichTextEditorContext =
