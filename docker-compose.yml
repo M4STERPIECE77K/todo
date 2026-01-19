@@ -1,0 +1,33 @@
+services:
+  web:
+    build: .
+    ports:
+      - "3000:80"
+    environment:
+      - NODE_ENV=production
+      - VITE_API_BASE_URL=${VITE_API_BASE_URL}
+    env_file:
+      - .env
+    depends_on:
+      - db
+    restart: always
+
+  db:
+    image: postgres:16-alpine
+    restart: always
+    environment:
+      POSTGRES_DB: ${DB_NAME:-taskmaster}
+      POSTGRES_USER: ${DB_USER:-masterpiece}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-zntPEGASUS@.......123}
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./database:/docker-entrypoint-initdb.d
+
+volumes:
+  postgres_data:
+
+networks:
+  default:
+    name: react-app-network
