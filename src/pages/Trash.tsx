@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, VStack, Text, HStack, Button, Flex } from '@chakra-ui/react';
+import { Box, VStack, Text, Button, Flex } from '@chakra-ui/react';
 import TaskItem from './TaskItem';
 
 const Trash: React.FC = () => {

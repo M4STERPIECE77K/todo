@@ -1,6 +1,5 @@
 import React from 'react';
 import { Box, VStack, Text, HStack } from '@chakra-ui/react';
-import { Tag } from '../components/ui/tag';
 import TaskItem from './TaskItem';
 
 const Upcoming: React.FC = () => {
