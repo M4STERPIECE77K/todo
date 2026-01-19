@@ -1,11 +1,23 @@
 services:
   web:
-    build: .
+    build:
+      context: ./frontend
     ports:
       - "3000:80"
     environment:
       - NODE_ENV=production
       - VITE_API_BASE_URL=${VITE_API_BASE_URL}
+    env_file:
+      - .env
+    depends_on:
+      - backend
+    restart: always
+
+  backend:
+    build:
+      context: ./backend
+    ports:
+      - "8080:8080"
     env_file:
       - .env
     depends_on:
@@ -15,10 +27,8 @@ services:
   db:
     image: postgres:16-alpine
     restart: always
-    environment:
-      POSTGRES_DB: ${DB_NAME:-taskmaster}
-      POSTGRES_USER: ${DB_USER:-masterpiece}
-      POSTGRES_PASSWORD: ${DB_PASSWORD:-zntPEGASUS@.......123}
+    env_file:
+      - .env
     ports:
       - "5433:5432"
     volumes:
