@@ -2,9 +2,7 @@ name: CI Develop
 
 on:
   push:
-    branches: [ develop ]
-  pull_request:
-    branches: [ develop ]
+    branches: [ develop, "feature/*", "feat/*" ]
 
 jobs:
   build:
